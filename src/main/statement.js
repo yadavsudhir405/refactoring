@@ -9,9 +9,7 @@ export function statement(invoice, plays) {
         thisAmount = amountFor(perf);
 
         // add volume credits
-        volumeCredits += Math.max(perf.audience - 30, 0);
-        // add extra credit for every ten comedy attendees
-        if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+        volumeCredits += volumeCreditFor(perf);
 
         // print line for this order
         result += `  ${playFor(perf).name}: ${usd(thisAmount/100)} (${perf.audience} seats)\n`;
@@ -52,5 +50,14 @@ export function statement(invoice, plays) {
         return new Intl.NumberFormat("en-US",
             { style: "currency", currency: "USD",
                 minimumFractionDigits: 2 }).format(amount)
+    }
+
+    function volumeCreditFor(perf) {
+        let result = 0;
+        result += Math.max(perf.audience - 30, 0);
+        // add extra credit for every ten comedy attendees
+        if ("comedy" === playFor(perf).type) result += Math.floor(perf.audience / 5);
+
+        return result;
     }
 }
