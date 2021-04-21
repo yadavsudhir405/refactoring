@@ -1,18 +1,11 @@
 export function statement(invoice, plays) {
     let result = `Statement for ${invoice.customer}\n`;
-    let totalAmount = 0;
-
-    for(let perf of invoice.performances){
-        let thisAmount = 0;
-        thisAmount =  amountFor(perf);
-        totalAmount += thisAmount;
-    }
 
     for (let perf of invoice.performances) {
         result += `  ${playFor(perf).name}: ${usd(amountFor(perf)/100)} (${perf.audience} seats)\n`;
     }
 
-    result += `Amount owed is ${usd(totalAmount/100)}\n`;
+    result += `Amount owed is ${usd(totalAmount()/100)}\n`;
     result += `You earned ${volumeCredit()} credits\n`;
     return result;
 
@@ -64,5 +57,15 @@ export function statement(invoice, plays) {
         if ("comedy" === playFor(perf).type) result += Math.floor(perf.audience / 5);
 
         return result;
+    }
+
+    function totalAmount() {
+        let totalAmount = 0;
+        for (let perf of invoice.performances) {
+            let thisAmount = 0;
+            thisAmount = amountFor(perf);
+            totalAmount += thisAmount;
+        }
+        return totalAmount;
     }
 }
