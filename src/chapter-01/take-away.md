@@ -5,13 +5,15 @@ first refactor the program to make it easy to add the feature, then add the feat
 
 3) Refactoring changes the programs in small steps, so if you make a mistake, it is easy to find where the bug is.
 
-4) After extracting to function, look for any quick and easy things that can be done to exracted function.
-For example: rename some variables that makes them clear. For example variale that is getting returned
+4) After extracting to function, look for any quick and easy things that can be done to extracted function.
+For example: rename some variables that makes them clear. For example variable that is getting returned
 from function can be named as result so that I always know its role.
    
 5) When programming, follow the camping rule: Always leave the code base healthier than when you found it.
 
 6) The true test of good code is how easy it is to change it.
+
+7) Try to replace conditional logic by polymorphism.
    
 **Used refactoring techniques:**
 
